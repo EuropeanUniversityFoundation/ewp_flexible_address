@@ -1,0 +1,22 @@
+{
+  "name": "ewp_flexible_address",
+  "type": "drupal-module",
+  "description": "Drupal implementation of the EWP Flexible Address Type",
+  "keywords": [
+  ],
+  "homepage": "",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "",
+    "source": ""
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/EuropeanUniversityFoundation/ewp_core"
+    }
+  ],
+  "require": {
+    "euf/ewp_core": "dev-master"
+  }
+}

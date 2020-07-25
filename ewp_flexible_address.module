@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains ewp_flexible_address.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function ewp_flexible_address_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the ewp_flexible_address module.
+    case 'help.page.ewp_flexible_address':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Drupal implementation of the EWP Flexible Address Type') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ewp_flexible_address_theme() {
+  return [
+    'ewp_flexible_address' => [
+      'render element' => 'children',
+    ],
+  ];
+}

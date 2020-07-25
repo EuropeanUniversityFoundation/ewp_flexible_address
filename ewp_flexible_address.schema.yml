@@ -1,0 +1,10 @@
+field.storage_settings.ewp_flexible_address:
+  type: mapping
+  label: 'Storage settings'
+  mapping:
+    max_length_long:
+      type: integer
+      label: 'Maximum length for long fields'
+    max_length_short:
+      type: integer
+      label: 'Maximum length for short fields'
