@@ -1,5 +1,5 @@
 {
-  "name": "ewp_flexible_address",
+  "name": "euf/ewp_flexible_address",
   "type": "drupal-module",
   "description": "Drupal implementation of the EWP Flexible Address Type",
   "keywords": [
