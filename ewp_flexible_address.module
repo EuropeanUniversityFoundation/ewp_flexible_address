@@ -30,7 +30,19 @@ function ewp_flexible_address_theme() {
   return [
     'ewp_flexible_address_default' => [
       'variables' => [
-        'value' => NULL,
+        'recipient_name' => NULL,
+        'address_line' => NULL,
+        'building_number' => NULL,
+        'building_name' => NULL,
+        'street_name' => NULL,
+        'unit' => NULL,
+        'floor' => NULL,
+        'post_office_box' => NULL,
+        'delivery_point_code' => NULL,
+        'postal_code' => NULL,
+        'locality' => NULL,
+        'region' => NULL,
+        'country' => NULL,
       ],
     ],
   ];

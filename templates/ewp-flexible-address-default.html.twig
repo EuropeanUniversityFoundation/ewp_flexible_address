@@ -4,11 +4,41 @@
  * Default theme implementation of a Flexible Address element.
  *
  * Available variables:
- * - value: the value.
+ * - recipient_name;
+ * - address_line: combines address_line_1~4, used only for fallback;
+ * - building_number;
+ * - building_name;
+ * - street_name;
+ * - unit;
+ * - floor;
+ * - post_office_box;
+ * - delivery_point_code;
+ * - postal_code;
+ * - locality;
+ * - region;
+ * - country: the name of the Country.
  *
  * @see template_preprocess()
  *
  * @ingroup themeable
  */
 #}
-<span class="value">{{ value }}</span>
+<div class="flexible-address">
+{% if recipient_name %}<span class="recipient_name">{{ recipient_name }}</span><br>{% endif %}
+{% if address_line %}<span class="address_line">{% for line in address_line %}{{ line }}<br>{% endfor %}</span>{% endif %}
+{% if building_number %}<span class="building_number">{{ building_number }}</span>{% endif %}
+{% if building_number and building_name %} - {% endif %}
+{% if building_name %}<span class="building_name">{{ building_name }}</span>{% endif %}
+{% if building_number or building_name %}<br>{% endif %}
+{% if street_name %}<span class="street_name">{{ street_name }}</span><br>{% endif %}
+{% if unit %}<span class="unit">{{ 'Unit'|t }}: {{ unit }}</span>{% endif %}
+{% if unit and floor %} - {% endif %}
+{% if floor %}<span class="floor">{{ 'Floor'|t }}: {{ floor }}</span>{% endif %}
+{% if unit or floor %}<br>{% endif %}
+{% if post_office_box %}<span class="post_office_box">{{ 'PO box'|t }}: {{ post_office_box }}</span><br>{% endif %}
+{% if delivery_point_code %}<span class="delivery_point_code">{{ 'DP code'|t }}: {{ delivery_point_code }}</span><br>{% endif %}
+{% if postal_code %}<span class="postal_code">{{ postal_code }}</span>&nbsp;{% endif %}
+{% if locality %}<span class="locality">{{ locality }}</span><br>{% endif %}
+{% if region %}<span class="region">{{ region }}</span><br>{% endif %}
+{% if country %}<span class="country">{{ country }}</span><br>{% endif %}
+</div>
