@@ -28,8 +28,10 @@ function ewp_flexible_address_help($route_name, RouteMatchInterface $route_match
  */
 function ewp_flexible_address_theme() {
   return [
-    'ewp_flexible_address' => [
-      'render element' => 'children',
+    'ewp_flexible_address_default' => [
+      'variables' => [
+        'value' => NULL,
+      ],
     ],
   ];
 }

@@ -9,17 +9,17 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Plugin implementation of the 'ewp_flexible_address_default' formatter.
+ * Plugin implementation of the 'ewp_flexible_address_simple' formatter.
  *
  * @FieldFormatter(
- *   id = "ewp_flexible_address_default",
- *   label = @Translation("Default"),
+ *   id = "ewp_flexible_address_simple",
+ *   label = @Translation("Simple (display all)"),
  *   field_types = {
  *     "ewp_flexible_address"
  *   }
  * )
  */
-class FlexibleAddressDefaultFormatter extends FormatterBase {
+class FlexibleAddressSimpleFormatter extends FormatterBase {
 
   /**
    * {@inheritdoc}
@@ -56,14 +56,30 @@ class FlexibleAddressDefaultFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $value = "Work in progress...";
-      $elements[$delta] = [
-        '#theme' => 'ewp_flexible_address_default',
-        '#value' => $value,
-      ];
+      $elements[$delta] = ['#markup' => $this->viewValue($item)];
     }
 
     return $elements;
+  }
+
+  /**
+   * Generate the output appropriate for one field item.
+   *
+   * @param \Drupal\Core\Field\FieldItemInterface $item
+   *   One field item.
+   *
+   * @return string
+   *   The textual output generated.
+   */
+  protected function viewValue(FieldItemInterface $item) {
+    $output = '';
+    $properties = $item->getProperties();
+    foreach ($properties as $key => $object) {
+      // if the property has a value, print the label as well
+      $output .= ($object->getValue()) ? $object->getDataDefinition()->getLabel() . ': ' . $object->getValue() . '<br />' : '' ;
+    }
+
+    return $output;
   }
 
 }
