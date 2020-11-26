@@ -44,62 +44,48 @@ class FlexibleAddressItem extends FieldItemBase {
 
     // Option 1: addressLine format
     $properties['address_line_1'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 1'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Address line 1'));
 
     $properties['address_line_2'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 2'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Address line 2'));
 
     $properties['address_line_3'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 3'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Address line 3'));
 
     $properties['address_line_4'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 4'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Address line 4'));
 
     // Option 2: advanced format
     $properties['building_number'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Building number'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Building number'));
 
     $properties['building_name'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Building name'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Building name'));
 
     $properties['street_name'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Street name'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Street name'));
 
     $properties['unit'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Unit'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Unit'));
 
     $properties['floor'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Floor'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Floor'));
 
     $properties['post_office_box'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Post office box'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Post office box'));
 
     $properties['delivery_point_code'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Delivery point code'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Delivery point code'));
 
     // Common
     $properties['postal_code'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Postal code'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Postal code'));
 
     $properties['locality'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Locality'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Locality'));
 
     $properties['region'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Region'))
-      ->setRequired(TRUE);
+      ->setLabel(new TranslatableMarkup('Region'));
 
     $properties['country'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Country'))
