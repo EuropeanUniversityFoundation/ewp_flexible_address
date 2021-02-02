@@ -2,6 +2,7 @@ name: 'EWP Flexible Address'
 type: module
 description: 'Drupal implementation of the EWP Flexible Address Type'
 core: 8.x
+core_version_requirement: ^8 || ^9
 package: 'EWP'
 dependencies:
   - ewp_core:ewp_core
