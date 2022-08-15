@@ -1,3 +1,5 @@
+# Schema for the configuration of the Flexible Address field type.
+
 field.storage_settings.ewp_flexible_address:
   type: mapping
   label: 'Storage settings'
