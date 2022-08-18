@@ -2,11 +2,14 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldFormatter;
 
-use Drupal\Component\Utility\Html;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Locale\CountryManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'ewp_flexible_address_default' formatter.
@@ -19,7 +22,47 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class FlexibleAddressDefaultFormatter extends FormatterBase {
+class FlexibleAddressDefaultFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The country manager.
+   *
+   * @var \Drupal\Core\Locale\CountryManagerInterface
+   */
+  protected $countryManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(
+    $plugin_id,
+    $plugin_definition,
+    FieldDefinitionInterface $field_definition,
+    array $settings,
+    $label,
+    $view_mode,
+    array $third_party_settings,
+    CountryManagerInterface $country_manager
+  ) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
+    $this->countryManager = $country_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['label'],
+      $configuration['view_mode'],
+      $configuration['third_party_settings'],
+      $container->get('country_manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -56,21 +99,20 @@ class FlexibleAddressDefaultFormatter extends FormatterBase {
     $elements = [];
 
     foreach ($items as $delta => $item) {
-      $recipient_name = ($item->recipient_name) ? $item->recipient_name : NULL ;
-      // Structured format fields
-      $building_number = ($item->building_number) ? $item->building_number : NULL ;
-      $building_name = ($item->building_name) ? $item->building_name : NULL ;
-      $street_name = ($item->street_name) ? $item->street_name : NULL ;
-      $unit = ($item->unit) ? $item->unit : NULL ;
-      $floor = ($item->floor) ? $item->floor : NULL ;
-      $post_office_box = ($item->post_office_box) ? $item->post_office_box : NULL ;
-      $delivery_point_code = ($item->delivery_point_code) ? $item->delivery_point_code : NULL ;
-      // Check if fallback mode is needed
-      if ($building_number || $building_name || $street_name || $unit || $floor || $post_office_box || $delivery_point_code) {
-        // At least one structured format field is present
+      // Determine which address format to display.
+      if (
+        isset($item->building_number) ||
+        isset($item->building_name) ||
+        isset($item->street_name) ||
+        isset($item->unit) ||
+        isset($item->floor) ||
+        isset($item->post_office_box) ||
+        isset($item->delivery_point_code)
+      ) {
+        // At least one structured format field is present.
         $address_line = NULL;
       } else {
-        // Assemble the fallback format
+        // Assemble the fallback format.
         $address_line = [];
         $address_lines = [
           'address_line_1',
@@ -84,32 +126,24 @@ class FlexibleAddressDefaultFormatter extends FormatterBase {
           }
         }
       }
-      // Common fields
-      $postal_code = ($item->postal_code) ? $item->postal_code : NULL ;
-      $locality = ($item->locality) ? $item->locality : NULL ;
-      $region = ($item->region) ? $item->region : NULL ;
-      if ($item->country) {
-        // Get the country name
-        $countries = \Drupal::service('country_manager')->getList();
-        $country = $countries[$item->country];
-      } else {
-        $country = NULL;
-      }
+
+      $country_list = $this->countryManager->getList();
+      $country = ($item->country) ? $country_list[$item->country] : NULL;
 
       $elements[$delta] = [
         '#theme' => 'ewp_flexible_address_default',
-        '#recipient_name' => $recipient_name,
+        '#recipient_name' => $item->recipient_name ?? NULL,
         '#address_line' => $address_line,
-        '#building_number' => $building_number,
-        '#building_name' => $building_name,
-        '#street_name' => $street_name,
-        '#unit' => $unit,
-        '#floor' => $floor,
-        '#post_office_box' => $post_office_box,
-        '#delivery_point_code' => $delivery_point_code,
-        '#postal_code' => $postal_code,
-        '#locality' => $locality,
-        '#region' => $region,
+        '#building_number' => $item->building_number ?? NULL,
+        '#building_name' => $item->building_name ?? NULL,
+        '#street_name' => $item->street_name ?? NULL,
+        '#unit' => $item->unit ?? NULL,
+        '#floor' => $item->floor ?? NULL,
+        '#post_office_box' => $item->post_office_box ?? NULL,
+        '#delivery_point_code' => $item->delivery_point_code ?? NULL,
+        '#postal_code' => $item->postal_code ?? NULL,
+        '#locality' => $item->locality ?? NULL,
+        '#region' => $item->region ?? NULL,
         '#country' => $country,
       ];
     }

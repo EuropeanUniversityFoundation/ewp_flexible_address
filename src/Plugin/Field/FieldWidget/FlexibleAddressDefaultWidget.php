@@ -2,9 +2,13 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldWidget;
 
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Locale\CountryManagerInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'ewp_flexible_address_default' widget.
@@ -18,14 +22,49 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class FlexibleAddressDefaultWidget extends WidgetBase {
+class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * The country manager.
+   *
+   * @var \Drupal\Core\Locale\CountryManagerInterface
+   */
+  protected $countryManager;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(
+    $plugin_id,
+    $plugin_definition,
+    FieldDefinitionInterface $field_definition,
+    array $settings,
+    array $third_party_settings,
+    CountryManagerInterface $country_manager
+  ) {
+    parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
+    $this->countryManager = $country_manager;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $plugin_id,
+      $plugin_definition,
+      $configuration['field_definition'],
+      $configuration['settings'],
+      $configuration['third_party_settings'],
+      $container->get('country_manager')
+    );
+  }
 
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
     return [
-      //
     ] + parent::defaultSettings();
   }
 
@@ -34,9 +73,6 @@ class FlexibleAddressDefaultWidget extends WidgetBase {
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
     $elements = [];
-
-    //
-
     return $elements;
   }
 
@@ -45,9 +81,6 @@ class FlexibleAddressDefaultWidget extends WidgetBase {
    */
   public function settingsSummary() {
     $summary = [];
-
-    //
-
     return $summary;
   }
 
@@ -61,95 +94,95 @@ class FlexibleAddressDefaultWidget extends WidgetBase {
 
     $element['recipient_name'] = [
       '#type' => 'textfield',
-      '#title' => t('Recipient name'),
-      '#default_value' => isset($items[$delta]->recipient_name) ? $items[$delta]->recipient_name : NULL,
+      '#title' => $this->t('Recipient name'),
+      '#default_value' => $items[$delta]->recipient_name ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
-    // Option 1: addressLine format
+    // Option 1: addressLine format.
     $element['address_line_1'] = [
       '#type' => 'textfield',
-      '#title' => t('Simple address'),
-      '#default_value' => isset($items[$delta]->address_line_1) ? $items[$delta]->address_line_1 : NULL,
+      '#title' => $this->t('Simple address'),
+      '#default_value' => $items[$delta]->address_line_1 ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
     $element['address_line_2'] = [
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->address_line_2) ? $items[$delta]->address_line_2 : NULL,
+      '#default_value' => $items[$delta]->address_line_2 ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
     $element['address_line_3'] = [
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->address_line_3) ? $items[$delta]->address_line_3 : NULL,
+      '#default_value' => $items[$delta]->address_line_3 ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
     $element['address_line_4'] = [
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->address_line_4) ? $items[$delta]->address_line_4 : NULL,
+      '#default_value' => $items[$delta]->address_line_4 ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
-    // Option 2: advanced format
+    // Option 2: advanced format.
     $element['building_number'] = [
       '#type' => 'textfield',
-      '#title' => t('Building number'),
-      '#default_value' => isset($items[$delta]->building_number) ? $items[$delta]->building_number : NULL,
+      '#title' => $this->t('Building number'),
+      '#default_value' => $items[$delta]->building_number ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting('max_length_short'),
     ];
 
     $element['building_name'] = [
       '#type' => 'textfield',
-      '#title' => t('Building name'),
-      '#default_value' => isset($items[$delta]->building_name) ? $items[$delta]->building_name : NULL,
+      '#title' => $this->t('Building name'),
+      '#default_value' => $items[$delta]->building_name ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
     $element['street_name'] = [
       '#type' => 'textfield',
-      '#title' => t('Street name'),
-      '#default_value' => isset($items[$delta]->street_name) ? $items[$delta]->street_name : NULL,
+      '#title' => $this->t('Street name'),
+      '#default_value' => $items[$delta]->street_name ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
     $element['unit'] = [
       '#type' => 'textfield',
-      '#title' => t('Unit'),
-      '#default_value' => isset($items[$delta]->unit) ? $items[$delta]->unit : NULL,
+      '#title' => $this->t('Unit'),
+      '#default_value' => $items[$delta]->unit ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting('max_length_short'),
     ];
 
     $element['floor'] = [
       '#type' => 'textfield',
-      '#title' => t('Floor'),
-      '#default_value' => isset($items[$delta]->floor) ? $items[$delta]->floor : NULL,
+      '#title' => $this->t('Floor'),
+      '#default_value' => $items[$delta]->floor ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting('max_length_short'),
     ];
 
     $element['post_office_box'] = [
       '#type' => 'textfield',
-      '#title' => t('Post office box'),
-      '#default_value' => isset($items[$delta]->post_office_box) ? $items[$delta]->post_office_box : NULL,
+      '#title' => $this->t('Post office box'),
+      '#default_value' => $items[$delta]->post_office_box ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting('max_length_short'),
     ];
 
     $element['delivery_point_code'] = [
       '#type' => 'textfield',
-      '#title' => t('Delivery point code'),
-      '#default_value' => isset($items[$delta]->delivery_point_code) ? $items[$delta]->delivery_point_code : NULL,
+      '#title' => $this->t('Delivery point code'),
+      '#default_value' => $items[$delta]->delivery_point_code ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
@@ -157,37 +190,40 @@ class FlexibleAddressDefaultWidget extends WidgetBase {
     // Common
     $element['postal_code'] = [
       '#type' => 'textfield',
-      '#title' => t('Postal code'),
-      '#default_value' => isset($items[$delta]->postal_code) ? $items[$delta]->postal_code : NULL,
+      '#title' => $this->t('Postal code'),
+      '#default_value' => $items[$delta]->postal_code ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting('max_length_short'),
     ];
 
     $element['locality'] = [
       '#type' => 'textfield',
-      '#title' => t('Locality'),
-      '#default_value' => isset($items[$delta]->locality) ? $items[$delta]->locality : NULL,
+      '#title' => $this->t('Locality'),
+      '#default_value' => $items[$delta]->locality ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
     $element['region'] = [
       '#type' => 'textfield',
-      '#title' => t('Region'),
-      '#default_value' => isset($items[$delta]->region) ? $items[$delta]->region : NULL,
+      '#title' => $this->t('Region'),
+      '#default_value' => $items[$delta]->region ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting('max_length_long'),
     ];
 
-    // see Country module
-    $select_options = \Drupal::service('country_manager')->getList();
+    $select_options = $this->countryManager->getList();
     asort($select_options);
+
     $element['country'] = [
       '#type' => 'select',
-      '#title' => t('Country'),
+      '#title' => $this->t('Country'),
       '#options' => $select_options,
       '#empty_value' => '',
-      '#default_value' => (isset($items[$delta]->country) && isset($select_options[$items[$delta]->country])) ? $items[$delta]->country : NULL,
+      '#default_value' => (
+        isset($items[$delta]->country) &&
+        isset($select_options[$items[$delta]->country])
+      ) ? $items[$delta]->country : NULL,
     ];
 
     return $element;

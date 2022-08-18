@@ -74,9 +74,13 @@ class FlexibleAddressSimpleFormatter extends FormatterBase {
   protected function viewValue(FieldItemInterface $item) {
     $output = '';
     $properties = $item->getProperties();
+
     foreach ($properties as $key => $object) {
       // if the property has a value, print the label as well
-      $output .= ($object->getValue()) ? $object->getDataDefinition()->getLabel() . ': ' . $object->getValue() . '<br />' : '' ;
+      if ($object->getValue()) {
+        $output .= $object->getDataDefinition()->getLabel() . ': ';
+        $output .= $object->getValue() . '<br />';
+      }
     }
 
     return $output;

@@ -37,12 +37,12 @@ class FlexibleAddressItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-    // Common
+    // Common.
     $properties['recipient_name'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Recipient name'))
       ->setRequired(TRUE);
 
-    // Option 1: addressLine format
+    // Option 1: addressLine format.
     $properties['address_line_1'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Address line 1'));
 
@@ -55,7 +55,7 @@ class FlexibleAddressItem extends FieldItemBase {
     $properties['address_line_4'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Address line 4'));
 
-    // Option 2: advanced format
+    // Option 2: advanced format.
     $properties['building_number'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Building number'));
 
@@ -77,7 +77,7 @@ class FlexibleAddressItem extends FieldItemBase {
     $properties['delivery_point_code'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Delivery point code'));
 
-    // Common
+    // Common.
     $properties['postal_code'] = DataDefinition::create('string')
       ->setLabel(new TranslatableMarkup('Postal code'));
 
@@ -179,20 +179,7 @@ class FlexibleAddressItem extends FieldItemBase {
   public function getConstraints() {
     $constraints = parent::getConstraints();
 
-    // if ($max_length = $this->getSetting('max_length')) {
-    //   $constraint_manager = \Drupal::typedDataManager()->getValidationConstraintManager();
-    //   $constraints[] = $constraint_manager->create('ComplexData', [
-    //     'value' => [
-    //       'Length' => [
-    //         'max' => $max_length,
-    //         'maxMessage' => t('%name: may not be longer than @max characters.', [
-    //           '%name' => $this->getFieldDefinition()->getLabel(),
-    //           '@max' => $max_length
-    //         ]),
-    //       ],
-    //     ],
-    //   ]);
-    // }
+    // TODO: Impose max length constraints for short and long fields.
 
     return $constraints;
   }
