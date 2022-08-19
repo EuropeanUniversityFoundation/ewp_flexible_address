@@ -8,6 +8,7 @@ use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\ewp_flexible_address\Plugin\Field\FieldType\FlexibleAddressItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -26,7 +27,7 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
   /**
    * The country manager.
-   *
+   *self::ADDRESS_LINE_1
    * @var \Drupal\Core\Locale\CountryManagerInterface
    */
   protected $countryManager;
@@ -92,132 +93,132 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
       '#type' => 'details',
     ];
 
-    $element['recipient_name'] = [
+    $element[FlexibleAddressItem::RECIPIENT_NAME] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Recipient name'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_RECIPIENT_NAME),
       '#default_value' => $items[$delta]->recipient_name ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
     // Option 1: addressLine format.
-    $element['address_line_1'] = [
+    $element[FlexibleAddressItem::ADDRESS_LINE_1] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Simple address'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_ADDRESS_LINE_1),
       '#default_value' => $items[$delta]->address_line_1 ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    $element['address_line_2'] = [
+    $element[FlexibleAddressItem::ADDRESS_LINE_2] = [
       '#type' => 'textfield',
       '#default_value' => $items[$delta]->address_line_2 ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    $element['address_line_3'] = [
+    $element[FlexibleAddressItem::ADDRESS_LINE_3] = [
       '#type' => 'textfield',
       '#default_value' => $items[$delta]->address_line_3 ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    $element['address_line_4'] = [
+    $element[FlexibleAddressItem::ADDRESS_LINE_4] = [
       '#type' => 'textfield',
       '#default_value' => $items[$delta]->address_line_4 ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
     // Option 2: advanced format.
-    $element['building_number'] = [
+    $element[FlexibleAddressItem::BUILDING_NUMBER] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Building number'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_BUILDING_NUMBER),
       '#default_value' => $items[$delta]->building_number ?? NULL,
       '#size' => 16,
-      '#maxlength' => $this->getFieldSetting('max_length_short'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
     ];
 
-    $element['building_name'] = [
+    $element[FlexibleAddressItem::BUILDING_NAME] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Building name'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_BUILDING_NAME),
       '#default_value' => $items[$delta]->building_name ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    $element['street_name'] = [
+    $element[FlexibleAddressItem::STREET_NAME] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Street name'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_STREET_NAME),
       '#default_value' => $items[$delta]->street_name ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    $element['unit'] = [
+    $element[FlexibleAddressItem::UNIT] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Unit'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_UNIT),
       '#default_value' => $items[$delta]->unit ?? NULL,
       '#size' => 16,
-      '#maxlength' => $this->getFieldSetting('max_length_short'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
     ];
 
-    $element['floor'] = [
+    $element[FlexibleAddressItem::FLOOR] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Floor'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_FLOOR),
       '#default_value' => $items[$delta]->floor ?? NULL,
       '#size' => 16,
-      '#maxlength' => $this->getFieldSetting('max_length_short'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
     ];
 
-    $element['post_office_box'] = [
+    $element[FlexibleAddressItem::POST_OFFICE_BOX] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Post office box'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_POST_OFFICE_BOX),
       '#default_value' => $items[$delta]->post_office_box ?? NULL,
       '#size' => 16,
-      '#maxlength' => $this->getFieldSetting('max_length_short'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
     ];
 
-    $element['delivery_point_code'] = [
+    $element[FlexibleAddressItem::DELIVERY_POINT_CODE] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Delivery point code'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_DELIVERY_POINT_CODE),
       '#default_value' => $items[$delta]->delivery_point_code ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
     // Common
-    $element['postal_code'] = [
+    $element[FlexibleAddressItem::POSTAL_CODE] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Postal code'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_POSTAL_CODE),
       '#default_value' => $items[$delta]->postal_code ?? NULL,
       '#size' => 16,
-      '#maxlength' => $this->getFieldSetting('max_length_short'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
     ];
 
-    $element['locality'] = [
+    $element[FlexibleAddressItem::LOCALITY] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Locality'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_LOCALITY),
       '#default_value' => $items[$delta]->locality ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    $element['region'] = [
+    $element[FlexibleAddressItem::REGION] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Region'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_REGION),
       '#default_value' => $items[$delta]->region ?? NULL,
       '#size' => 60,
-      '#maxlength' => $this->getFieldSetting('max_length_long'),
+      '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
     $select_options = $this->countryManager->getList();
     asort($select_options);
 
-    $element['country'] = [
+    $element[FlexibleAddressItem::COUNTRY] = [
       '#type' => 'select',
-      '#title' => $this->t('Country'),
+      '#title' => $this->t(FlexibleAddressItem::LABEL_COUNTRY),
       '#options' => $select_options,
       '#empty_value' => '',
       '#default_value' => (

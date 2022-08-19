@@ -23,13 +23,65 @@ use Drupal\Core\TypedData\DataDefinition;
  */
 class FlexibleAddressItem extends FieldItemBase {
 
+  const MAX_LONG = 'max_length_long';
+  const MAX_SHORT = 'max_length_short';
+
+  const RECIPIENT_NAME = 'recipient_name';
+  const LABEL_RECIPIENT_NAME = 'Recipient name';
+
+  const ADDRESS_LINE_1 = 'address_line_1';
+  const LABEL_ADDRESS_LINE_1 = 'Address line 1';
+
+  const ADDRESS_LINE_2 = 'address_line_2';
+  const LABEL_ADDRESS_LINE_2 = 'Address line 2';
+
+  const ADDRESS_LINE_3 = 'address_line_3';
+  const LABEL_ADDRESS_LINE_3 = 'Address line 3';
+
+  const ADDRESS_LINE_4 = 'address_line_4';
+  const LABEL_ADDRESS_LINE_4 = 'Address line 4';
+
+  const BUILDING_NUMBER = 'building_number';
+  const LABEL_BUILDING_NUMBER = 'Building number';
+
+  const BUILDING_NAME = 'building_name';
+  const LABEL_BUILDING_NAME = 'Building name';
+
+  const STREET_NAME = 'street_name';
+  const LABEL_STREET_NAME = 'Street name';
+
+  const UNIT = 'unit';
+  const LABEL_UNIT = 'Unit';
+
+  const FLOOR = 'floor';
+  const LABEL_FLOOR = 'Floor';
+
+  const POST_OFFICE_BOX = 'post_office_box';
+  const LABEL_POST_OFFICE_BOX = 'Post office box';
+
+  const DELIVERY_POINT_CODE = 'delivery_point_code';
+  const LABEL_DELIVERY_POINT_CODE = 'Delivery point code';
+
+  const POSTAL_CODE = 'postal_code';
+  const LABEL_POSTAL_CODE = 'Postal code';
+
+  const LOCALITY = 'locality';
+  const LABEL_LOCALITY = 'Locality';
+
+  const REGION = 'region';
+  const LABEL_REGION = 'Region';
+
+  const COUNTRY = 'country';
+  const LABEL_COUNTRY = 'Country';
+
+
   /**
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
     return [
-      'max_length_long' => 255,
-      'max_length_short' => 16,
+      self::MAX_LONG => 255,
+      self::MAX_SHORT => 16,
     ] + parent::defaultStorageSettings();
   }
 
@@ -38,57 +90,57 @@ class FlexibleAddressItem extends FieldItemBase {
    */
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     // Common.
-    $properties['recipient_name'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Recipient name'))
+    $properties[self::RECIPIENT_NAME] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_RECIPIENT_NAME))
       ->setRequired(TRUE);
 
     // Option 1: addressLine format.
-    $properties['address_line_1'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 1'));
+    $properties[self::ADDRESS_LINE_1] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_1));
 
-    $properties['address_line_2'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 2'));
+    $properties[self::ADDRESS_LINE_2] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_2));
 
-    $properties['address_line_3'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 3'));
+    $properties[self::ADDRESS_LINE_3] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_3));
 
-    $properties['address_line_4'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Address line 4'));
+    $properties[self::ADDRESS_LINE_4] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_4));
 
     // Option 2: advanced format.
-    $properties['building_number'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Building number'));
+    $properties[self::BUILDING_NUMBER] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_BUILDING_NUMBER));
 
-    $properties['building_name'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Building name'));
+    $properties[self::BUILDING_NAME] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_BUILDING_NAME));
 
-    $properties['street_name'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Street name'));
+    $properties[self::STREET_NAME] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_STREET_NAME));
 
-    $properties['unit'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Unit'));
+    $properties[self::UNIT] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_UNIT));
 
-    $properties['floor'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Floor'));
+    $properties[self::FLOOR] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_FLOOR));
 
-    $properties['post_office_box'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Post office box'));
+    $properties[self::POST_OFFICE_BOX] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_POST_OFFICE_BOX));
 
-    $properties['delivery_point_code'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Delivery point code'));
+    $properties[self::DELIVERY_POINT_CODE] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_DELIVERY_POINT_CODE));
 
     // Common.
-    $properties['postal_code'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Postal code'));
+    $properties[self::POSTAL_CODE] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_POSTAL_CODE));
 
-    $properties['locality'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Locality'));
+    $properties[self::LOCALITY] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_LOCALITY));
 
-    $properties['region'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Region'));
+    $properties[self::REGION] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_REGION));
 
-    $properties['country'] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup('Country'))
+    $properties[self::COUNTRY] = DataDefinition::create('string')
+      ->setLabel(new TranslatableMarkup(self::LABEL_COUNTRY))
       ->setRequired(TRUE);
 
     return $properties;
@@ -100,72 +152,72 @@ class FlexibleAddressItem extends FieldItemBase {
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
     $schema = [
       'columns' => [
-        'recipient_name' => [
+        self::RECIPIENT_NAME => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        // Option 1: addressLine format
-        'address_line_1' => [
+        // Option 1: addressLine format.
+        self::ADDRESS_LINE_1 => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'address_line_2' => [
+        self::ADDRESS_LINE_2 => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'address_line_3' => [
+        self::ADDRESS_LINE_3 => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'address_line_4' => [
+        self::ADDRESS_LINE_4 => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        // Option 2: advanced format
-        'building_number' => [
+        // Option 2: advanced format.
+        self::BUILDING_NUMBER => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_short'),
+          'length' => (int) $field_definition->getSetting(self::MAX_SHORT),
         ],
-        'building_name' => [
+        self::BUILDING_NAME => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'street_name' => [
+        self::STREET_NAME => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'unit' => [
+        self::UNIT => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_short'),
+          'length' => (int) $field_definition->getSetting(self::MAX_SHORT),
         ],
-        'floor' => [
+        self::FLOOR => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_short'),
+          'length' => (int) $field_definition->getSetting(self::MAX_SHORT),
         ],
-        'post_office_box' => [
+        self::POST_OFFICE_BOX => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_short'),
+          'length' => (int) $field_definition->getSetting(self::MAX_SHORT),
         ],
-        'delivery_point_code' => [
+        self::DELIVERY_POINT_CODE => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        // Common
-        'postal_code' => [
+        // Common.
+        self::POSTAL_CODE => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_short'),
+          'length' => (int) $field_definition->getSetting(self::MAX_SHORT),
         ],
-        'locality' => [
+        self::LOCALITY => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'region' => [
+        self::REGION => [
           'type' => 'varchar',
-          'length' => (int) $field_definition->getSetting('max_length_long'),
+          'length' => (int) $field_definition->getSetting(self::MAX_LONG),
         ],
-        'country' => [
+        self::COUNTRY => [
           'type' => 'varchar',
-          'length' => 2, // double digit country code
+          'length' => 2, // ISO 3166-1 alpha-2 country code.
         ],
       ],
     ];
@@ -178,8 +230,189 @@ class FlexibleAddressItem extends FieldItemBase {
    */
   public function getConstraints() {
     $constraints = parent::getConstraints();
+    $constraint_manager = \Drupal::typedDataManager()
+      ->getValidationConstraintManager();
 
-    // TODO: Impose max length constraints for short and long fields.
+    $field_label = $this->getFieldDefinition()->getLabel();
+
+    $constraints[] = $constraint_manager->create('ComplexData', [
+      self::RECIPIENT_NAME => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_RECIPIENT_NAME,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::ADDRESS_LINE_1 => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_ADDRESS_LINE_1,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::ADDRESS_LINE_2 => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_ADDRESS_LINE_2,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::ADDRESS_LINE_3 => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_ADDRESS_LINE_3,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::ADDRESS_LINE_4 => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_ADDRESS_LINE_4,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::BUILDING_NUMBER => [
+        'Length' => [
+          'max' => self::MAX_SHORT,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_BUILDING_NUMBER,
+              '@max' => self::MAX_SHORT,
+            ]),
+        ],
+      ],
+      self::BUILDING_NAME => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_BUILDING_NAME,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::STREET_NAME => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_STREET_NAME,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::UNIT => [
+        'Length' => [
+          'max' => self::MAX_SHORT,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_UNIT,
+              '@max' => self::MAX_SHORT,
+            ]),
+        ],
+      ],
+      self::FLOOR => [
+        'Length' => [
+          'max' => self::MAX_SHORT,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_FLOOR,
+              '@max' => self::MAX_SHORT,
+            ]),
+        ],
+      ],
+      self::POST_OFFICE_BOX => [
+        'Length' => [
+          'max' => self::MAX_SHORT,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_POST_OFFICE_BOX,
+              '@max' => self::MAX_SHORT,
+            ]),
+        ],
+      ],
+      self::DELIVERY_POINT_CODE => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_DELIVERY_POINT_CODE,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::POSTAL_CODE => [
+        'Length' => [
+          'max' => self::MAX_SHORT,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_POSTAL_CODE,
+              '@max' => self::MAX_SHORT,
+            ]),
+        ],
+      ],
+      self::LOCALITY => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_LOCALITY,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::REGION => [
+        'Length' => [
+          'max' => self::MAX_LONG,
+          'maxMessage' => $this
+            ->t('%field_label: %prop may not be longer than @max characters.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_REGION,
+              '@max' => self::MAX_LONG,
+            ]),
+        ],
+      ],
+      self::COUNTRY => [
+        'Regex' => [
+          'pattern' => "/^[A-Z]{2}$/",
+          'message' => $this
+            ->t('%field_label: %prop does not match the @iso format.', [
+              '%field_label' => $field_label,
+              '%prop' => self::LABEL_COUNTRY,
+              '@iso' => 'ISO 3166-1 alpha-2',
+            ]),
+        ],
+      ],
+    ]);
 
     return $constraints;
   }
@@ -190,22 +423,24 @@ class FlexibleAddressItem extends FieldItemBase {
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
     $elements = [];
 
-    $elements['max_length_long'] = [
+    $text = 'The maximum length for @length fields in characters.';
+
+    $elements[self::MAX_LONG] = [
       '#type' => 'number',
       '#title' => t('Maximum length for long fields'),
-      '#default_value' => $this->getSetting('max_length_long'),
+      '#default_value' => $this->getSetting(self::MAX_LONG),
       '#required' => TRUE,
-      '#description' => t('The maximum length for long fields in characters.'),
+      '#description' => $this->t($text, ['@length' => 'long']),
       '#min' => 1,
       '#disabled' => $has_data,
     ];
 
-    $elements['max_length_short'] = [
+    $elements[self::MAX_SHORT] = [
       '#type' => 'number',
       '#title' => t('Maximum length for short fields'),
-      '#default_value' => $this->getSetting('max_length_short'),
+      '#default_value' => $this->getSetting(self::MAX_SHORT),
       '#required' => TRUE,
-      '#description' => t('The maximum length for short fields in characters.'),
+      '#description' => $this->t($text, ['@length' => 'short']),
       '#min' => 1,
       '#disabled' => $has_data,
     ];
@@ -217,8 +452,8 @@ class FlexibleAddressItem extends FieldItemBase {
    * {@inheritdoc}
    */
   public function isEmpty() {
-    // Limit this check to the country code field
-    $value = $this->get('country')->getValue();
+    // Limit this check to the country code field.
+    $value = $this->get(self::COUNTRY)->getValue();
     return $value === NULL || $value === '';
   }
 

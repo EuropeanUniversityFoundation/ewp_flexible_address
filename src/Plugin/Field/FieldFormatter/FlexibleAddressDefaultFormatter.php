@@ -9,6 +9,7 @@ use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\ewp_flexible_address\Plugin\Field\FieldType\FlexibleAddressItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -115,10 +116,10 @@ class FlexibleAddressDefaultFormatter extends FormatterBase implements Container
         // Assemble the fallback format.
         $address_line = [];
         $address_lines = [
-          'address_line_1',
-          'address_line_2',
-          'address_line_3',
-          'address_line_4',
+          FlexibleAddressItem::ADDRESS_LINE_1,
+          FlexibleAddressItem::ADDRESS_LINE_2,
+          FlexibleAddressItem::ADDRESS_LINE_3,
+          FlexibleAddressItem::ADDRESS_LINE_4,
         ];
         foreach ($address_lines as $line) {
           if ($item->$line) {
