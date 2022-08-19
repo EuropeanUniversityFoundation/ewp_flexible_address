@@ -233,182 +233,182 @@ class FlexibleAddressItem extends FieldItemBase {
     $constraint_manager = \Drupal::typedDataManager()
       ->getValidationConstraintManager();
 
-    $field_label = $this->getFieldDefinition()->getLabel();
+    $field_definition = $this->getFieldDefinition();
+    $field_label = $field_definition->getLabel();
 
     $constraints[] = $constraint_manager->create('ComplexData', [
       self::RECIPIENT_NAME => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_RECIPIENT_NAME,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::ADDRESS_LINE_1 => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_ADDRESS_LINE_1,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::ADDRESS_LINE_2 => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_ADDRESS_LINE_2,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::ADDRESS_LINE_3 => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_ADDRESS_LINE_3,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::ADDRESS_LINE_4 => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_ADDRESS_LINE_4,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::BUILDING_NUMBER => [
         'Length' => [
-          'max' => self::MAX_SHORT,
+          'max' => (int) $field_definition->getSetting(self::MAX_SHORT),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_BUILDING_NUMBER,
-              '@max' => self::MAX_SHORT,
+              '@max' => (int) $field_definition->getSetting(self::MAX_SHORT),
             ]),
         ],
       ],
       self::BUILDING_NAME => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_BUILDING_NAME,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::STREET_NAME => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_STREET_NAME,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::UNIT => [
         'Length' => [
-          'max' => self::MAX_SHORT,
+          'max' => (int) $field_definition->getSetting(self::MAX_SHORT),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_UNIT,
-              '@max' => self::MAX_SHORT,
+              '@max' => (int) $field_definition->getSetting(self::MAX_SHORT),
             ]),
         ],
       ],
       self::FLOOR => [
         'Length' => [
-          'max' => self::MAX_SHORT,
+          'max' => (int) $field_definition->getSetting(self::MAX_SHORT),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_FLOOR,
-              '@max' => self::MAX_SHORT,
+              '@max' => (int) $field_definition->getSetting(self::MAX_SHORT),
             ]),
         ],
       ],
       self::POST_OFFICE_BOX => [
         'Length' => [
-          'max' => self::MAX_SHORT,
+          'max' => (int) $field_definition->getSetting(self::MAX_SHORT),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_POST_OFFICE_BOX,
-              '@max' => self::MAX_SHORT,
+              '@max' => (int) $field_definition->getSetting(self::MAX_SHORT),
             ]),
         ],
       ],
       self::DELIVERY_POINT_CODE => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_DELIVERY_POINT_CODE,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::POSTAL_CODE => [
         'Length' => [
-          'max' => self::MAX_SHORT,
+          'max' => (int) $field_definition->getSetting(self::MAX_SHORT),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_POSTAL_CODE,
-              '@max' => self::MAX_SHORT,
+              '@max' => (int) $field_definition->getSetting(self::MAX_SHORT),
             ]),
         ],
       ],
       self::LOCALITY => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_LOCALITY,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::REGION => [
         'Length' => [
-          'max' => self::MAX_LONG,
+          'max' => (int) $field_definition->getSetting(self::MAX_LONG),
           'maxMessage' => $this
             ->t('%field_label: %prop may not be longer than @max characters.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_REGION,
-              '@max' => self::MAX_LONG,
+              '@max' => (int) $field_definition->getSetting(self::MAX_LONG),
             ]),
         ],
       ],
       self::COUNTRY => [
         'Regex' => [
           'pattern' => "/^[A-Z]{2}$/",
-          'message' => $this
-            ->t('%field_label: %prop does not match the @iso format.', [
+          'message' => $this->t('%field_label: %prop must match the @format.', [
               '%field_label' => $field_label,
               '%prop' => self::LABEL_COUNTRY,
-              '@iso' => 'ISO 3166-1 alpha-2',
+              '@format' => 'ISO 3166-1 alpha-2 format',
             ]),
         ],
       ],
