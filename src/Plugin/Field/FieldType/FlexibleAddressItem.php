@@ -15,10 +15,7 @@ use Drupal\Core\TypedData\DataDefinition;
  * @FieldType(
  *   id = "ewp_flexible_address",
  *   label = @Translation("Flexible address"),
- *   description = {
- *     @Translation("Stores a collection of sub-fields describing an address."),
- *   },
- *   category = "ewp_contact",
+ *   description = @Translation("Stores a collection of sub-fields describing an address.",
  *   default_widget = "ewp_flexible_address_default",
  *   default_formatter = "ewp_flexible_address_default"
  * )
