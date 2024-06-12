@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Contains install, update and uninstall hooks.
+ */
+
+/**
  * Remove requirement for all values except Recipient name and Country.
  */
 function ewp_flexible_address_update_8101() {

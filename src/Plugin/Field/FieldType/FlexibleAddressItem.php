@@ -2,7 +2,6 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldType;
 
-use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -77,7 +76,6 @@ class FlexibleAddressItem extends FieldItemBase {
 
   const COUNTRY = 'country';
   const LABEL_COUNTRY = 'Country';
-
 
   /**
    * {@inheritdoc}
@@ -221,7 +219,8 @@ class FlexibleAddressItem extends FieldItemBase {
         ],
         self::COUNTRY => [
           'type' => 'varchar',
-          'length' => 2, // ISO 3166-1 alpha-2 country code.
+          'length' => 2,
+          // ISO 3166-1 alpha-2 country code.
         ],
       ],
     ];
@@ -410,10 +409,10 @@ class FlexibleAddressItem extends FieldItemBase {
         'Regex' => [
           'pattern' => "/^[A-Z]{2}$/",
           'message' => $this->t('%field_label: %prop must match the @format.', [
-              '%field_label' => $field_label,
-              '%prop' => self::LABEL_COUNTRY,
-              '@format' => 'ISO 3166-1 alpha-2 format',
-            ]),
+            '%field_label' => $field_label,
+            '%prop' => self::LABEL_COUNTRY,
+            '@format' => 'ISO 3166-1 alpha-2 format',
+          ]),
         ],
       ],
     ]);
@@ -431,7 +430,7 @@ class FlexibleAddressItem extends FieldItemBase {
 
     $elements[self::MAX_LONG] = [
       '#type' => 'number',
-      '#title' => t('Maximum length for long fields'),
+      '#title' => $this->t('Maximum length for long fields'),
       '#default_value' => $this->getSetting(self::MAX_LONG),
       '#required' => TRUE,
       '#description' => $this->t($text, ['@length' => 'long']),
@@ -441,7 +440,7 @@ class FlexibleAddressItem extends FieldItemBase {
 
     $elements[self::MAX_SHORT] = [
       '#type' => 'number',
-      '#title' => t('Maximum length for short fields'),
+      '#title' => $this->t('Maximum length for short fields'),
       '#default_value' => $this->getSetting(self::MAX_SHORT),
       '#required' => TRUE,
       '#description' => $this->t($text, ['@length' => 'short']),

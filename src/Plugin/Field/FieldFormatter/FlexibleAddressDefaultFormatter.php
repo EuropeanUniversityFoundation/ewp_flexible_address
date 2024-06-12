@@ -3,7 +3,6 @@
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -112,7 +111,8 @@ class FlexibleAddressDefaultFormatter extends FormatterBase implements Container
       ) {
         // At least one structured format field is present.
         $address_line = NULL;
-      } else {
+      }
+      else {
         // Assemble the fallback format.
         $address_line = [];
         $address_lines = [

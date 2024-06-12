@@ -27,7 +27,7 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
   /**
    * The country manager.
-   *self::ADDRESS_LINE_1
+   *
    * @var \Drupal\Core\Locale\CountryManagerInterface
    */
   protected $countryManager;
@@ -65,8 +65,7 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return [
-    ] + parent::defaultSettings();
+    return parent::defaultSettings();
   }
 
   /**

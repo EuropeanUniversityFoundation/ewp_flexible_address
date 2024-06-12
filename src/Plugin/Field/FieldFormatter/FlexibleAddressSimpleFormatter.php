@@ -2,7 +2,6 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldFormatter;
 
-use Drupal\Component\Utility\Html;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
@@ -75,7 +74,7 @@ class FlexibleAddressSimpleFormatter extends FormatterBase {
     $output = '';
     $properties = $item->getProperties();
 
-    foreach ($properties as $key => $object) {
+    foreach ($properties as $object) {
       // if the property has a value, print the label as well
       if ($object->getValue()) {
         $output .= $object->getDataDefinition()->getLabel() . ': ';
