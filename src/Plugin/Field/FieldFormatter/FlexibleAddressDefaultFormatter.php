@@ -123,7 +123,7 @@ class FlexibleAddressDefaultFormatter extends FormatterBase implements Container
         ];
         foreach ($address_lines as $line) {
           if ($item->$line) {
-            $address_line[] .= $item->$line;
+            $address_line[] = $item->$line;
           }
         }
       }
