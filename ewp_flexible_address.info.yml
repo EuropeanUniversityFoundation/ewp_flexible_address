@@ -1,7 +1,7 @@
 name: 'EWP Flexible Address'
 type: module
 description: 'Implements EWP Flexible Address Type as a field type.'
-core_version_requirement: ^9.5 || ^10 || ^11
+core_version_requirement: ^10.3 || ^11
 package: 'EWP'
 dependencies:
   - ewp_core:ewp_core

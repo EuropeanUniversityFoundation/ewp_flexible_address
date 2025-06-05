@@ -42,7 +42,7 @@ class FlexibleAddressDefaultFormatter extends FormatterBase implements Container
     $label,
     $view_mode,
     array $third_party_settings,
-    CountryManagerInterface $country_manager
+    CountryManagerInterface $country_manager,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $label, $view_mode, $third_party_settings);
     $this->countryManager = $country_manager;
@@ -88,7 +88,6 @@ class FlexibleAddressDefaultFormatter extends FormatterBase implements Container
   public function settingsSummary() {
     $summary = [];
     // Implement settings summary.
-
     return $summary;
   }
 

@@ -44,7 +44,6 @@ class FlexibleAddressSimpleFormatter extends FormatterBase {
   public function settingsSummary() {
     $summary = [];
     // Implement settings summary.
-
     return $summary;
   }
 
@@ -75,7 +74,7 @@ class FlexibleAddressSimpleFormatter extends FormatterBase {
     $properties = $item->getProperties();
 
     foreach ($properties as $object) {
-      // if the property has a value, print the label as well
+      // If the property has a value, print the label as well.
       if ($object->getValue()) {
         $output .= $object->getDataDefinition()->getLabel() . ': ';
         $output .= $object->getValue() . '<br />';

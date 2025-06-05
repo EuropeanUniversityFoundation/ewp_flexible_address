@@ -41,7 +41,7 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
     FieldDefinitionInterface $field_definition,
     array $settings,
     array $third_party_settings,
-    CountryManagerInterface $country_manager
+    CountryManagerInterface $country_manager,
   ) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
     $this->countryManager = $country_manager;
@@ -59,13 +59,6 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
       $configuration['third_party_settings'],
       $container->get('country_manager')
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function defaultSettings() {
-    return parent::defaultSettings();
   }
 
   /**
@@ -94,7 +87,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::RECIPIENT_NAME] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_RECIPIENT_NAME),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_RECIPIENT_NAME,
+      ]),
       '#default_value' => $items[$delta]->recipient_name ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
@@ -103,7 +98,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
     // Option 1: addressLine format.
     $element[FlexibleAddressItem::ADDRESS_LINE_1] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_ADDRESS_LINE_1),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_ADDRESS_LINE_1,
+      ]),
       '#default_value' => $items[$delta]->address_line_1 ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
@@ -133,7 +130,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
     // Option 2: advanced format.
     $element[FlexibleAddressItem::BUILDING_NUMBER] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_BUILDING_NUMBER),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_BUILDING_NUMBER,
+      ]),
       '#default_value' => $items[$delta]->building_number ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
@@ -141,7 +140,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::BUILDING_NAME] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_BUILDING_NAME),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_BUILDING_NAME,
+      ]),
       '#default_value' => $items[$delta]->building_name ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
@@ -149,7 +150,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::STREET_NAME] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_STREET_NAME),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_STREET_NAME,
+      ]),
       '#default_value' => $items[$delta]->street_name ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
@@ -157,7 +160,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::UNIT] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_UNIT),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_UNIT,
+      ]),
       '#default_value' => $items[$delta]->unit ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
@@ -165,7 +170,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::FLOOR] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_FLOOR),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_FLOOR,
+      ]),
       '#default_value' => $items[$delta]->floor ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
@@ -173,7 +180,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::POST_OFFICE_BOX] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_POST_OFFICE_BOX),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_POST_OFFICE_BOX,
+      ]),
       '#default_value' => $items[$delta]->post_office_box ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
@@ -181,16 +190,20 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::DELIVERY_POINT_CODE] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_DELIVERY_POINT_CODE),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_DELIVERY_POINT_CODE,
+      ]),
       '#default_value' => $items[$delta]->delivery_point_code ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
     ];
 
-    // Common
+    // Common.
     $element[FlexibleAddressItem::POSTAL_CODE] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_POSTAL_CODE),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_POSTAL_CODE,
+      ]),
       '#default_value' => $items[$delta]->postal_code ?? NULL,
       '#size' => 16,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_SHORT),
@@ -198,7 +211,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::LOCALITY] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_LOCALITY),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_LOCALITY,
+      ]),
       '#default_value' => $items[$delta]->locality ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
@@ -206,7 +221,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::REGION] = [
       '#type' => 'textfield',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_REGION),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_REGION,
+      ]),
       '#default_value' => $items[$delta]->region ?? NULL,
       '#size' => 60,
       '#maxlength' => $this->getFieldSetting(FlexibleAddressItem::MAX_LONG),
@@ -217,7 +234,9 @@ class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactor
 
     $element[FlexibleAddressItem::COUNTRY] = [
       '#type' => 'select',
-      '#title' => $this->t(FlexibleAddressItem::LABEL_COUNTRY),
+      '#title' => $this->t('@label', [
+        '@label' => FlexibleAddressItem::LABEL_COUNTRY,
+      ]),
       '#options' => $select_options,
       '#empty_value' => '',
       '#default_value' => (

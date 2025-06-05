@@ -93,56 +93,88 @@ class FlexibleAddressItem extends FieldItemBase {
   public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
     // Common.
     $properties[self::RECIPIENT_NAME] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_RECIPIENT_NAME))
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_RECIPIENT_NAME,
+      ]))
       ->setRequired(TRUE);
 
     // Option 1: addressLine format.
     $properties[self::ADDRESS_LINE_1] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_1));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_ADDRESS_LINE_1,
+      ]));
 
     $properties[self::ADDRESS_LINE_2] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_2));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_ADDRESS_LINE_2,
+      ]));
 
     $properties[self::ADDRESS_LINE_3] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_3));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_ADDRESS_LINE_3,
+      ]));
 
     $properties[self::ADDRESS_LINE_4] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_ADDRESS_LINE_4));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_ADDRESS_LINE_4,
+      ]));
 
     // Option 2: advanced format.
     $properties[self::BUILDING_NUMBER] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_BUILDING_NUMBER));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_BUILDING_NUMBER,
+      ]));
 
     $properties[self::BUILDING_NAME] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_BUILDING_NAME));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_BUILDING_NAME,
+      ]));
 
     $properties[self::STREET_NAME] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_STREET_NAME));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_STREET_NAME,
+      ]));
 
     $properties[self::UNIT] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_UNIT));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_UNIT,
+      ]));
 
     $properties[self::FLOOR] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_FLOOR));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_FLOOR,
+      ]));
 
     $properties[self::POST_OFFICE_BOX] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_POST_OFFICE_BOX));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_POST_OFFICE_BOX,
+      ]));
 
     $properties[self::DELIVERY_POINT_CODE] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_DELIVERY_POINT_CODE));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_DELIVERY_POINT_CODE,
+      ]));
 
     // Common.
     $properties[self::POSTAL_CODE] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_POSTAL_CODE));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_POSTAL_CODE,
+      ]));
 
     $properties[self::LOCALITY] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_LOCALITY));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_LOCALITY,
+      ]));
 
     $properties[self::REGION] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_REGION));
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_REGION,
+      ]));
 
     $properties[self::COUNTRY] = DataDefinition::create('string')
-      ->setLabel(new TranslatableMarkup(self::LABEL_COUNTRY))
+      ->setLabel(new TranslatableMarkup('@label', [
+        '@label' => self::LABEL_COUNTRY,
+      ]))
       ->setRequired(TRUE);
 
     return $properties;
@@ -426,14 +458,14 @@ class FlexibleAddressItem extends FieldItemBase {
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
     $elements = [];
 
-    $text = 'The maximum length for @length fields in characters.';
+    $text = 'The maximum length for this field type in characters.';
 
     $elements[self::MAX_LONG] = [
       '#type' => 'number',
       '#title' => $this->t('Maximum length for long fields'),
       '#default_value' => $this->getSetting(self::MAX_LONG),
       '#required' => TRUE,
-      '#description' => $this->t($text, ['@length' => 'long']),
+      '#description' => $this->t('@text', ['@text' => $text]),
       '#min' => 1,
       '#disabled' => $has_data,
     ];
@@ -443,7 +475,7 @@ class FlexibleAddressItem extends FieldItemBase {
       '#title' => $this->t('Maximum length for short fields'),
       '#default_value' => $this->getSetting(self::MAX_SHORT),
       '#required' => TRUE,
-      '#description' => $this->t($text, ['@length' => 'short']),
+      '#description' => $this->t('@text', ['@text' => $text]),
       '#min' => 1,
       '#disabled' => $has_data,
     ];
