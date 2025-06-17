@@ -2,6 +2,7 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldType;
 
+use Drupal\Core\Field\Attribute\FieldType;
 use Drupal\Core\Field\FieldItemBase;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -10,20 +11,20 @@ use Drupal\Core\TypedData\DataDefinition;
 
 /**
  * Plugin implementation of the 'ewp_flexible_address' field type.
- *
- * @FieldType(
- *   id = "ewp_flexible_address",
- *   label = @Translation("Flexible address"),
- *   description = {
- *     @Translation("Stores a collection of sub-fields describing an address."),
- *     @Translation("Allows a structured OAGIS-like format for the address."),
- *     @Translation("Allows a simplified fallback format for the address."),
- *   },
- *   category = "ewp_core",
- *   default_widget = "ewp_flexible_address_default",
- *   default_formatter = "ewp_flexible_address_default"
- * )
  */
+#[FieldType(
+  id: "ewp_flexible_address",
+  module: "ewp_core",
+  label: new TranslatableMarkup("Flexible address"),
+  description: [
+    new TranslatableMarkup("Stores a collection of sub-fields describing an address."),
+    new TranslatableMarkup("Allows a structured OAGIS-like format for the address."),
+    new TranslatableMarkup("Allows a simplified fallback format for the address."),
+  ],
+  category: "ewp_core",
+  default_widget: "ewp_flexible_address_default",
+  default_formatter: "ewp_flexible_address_default",
+)]
 class FlexibleAddressItem extends FieldItemBase {
 
   const MAX_LONG = 'max_length_long';

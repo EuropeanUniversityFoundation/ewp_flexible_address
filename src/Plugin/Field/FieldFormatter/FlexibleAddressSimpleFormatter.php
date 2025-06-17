@@ -2,22 +2,23 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Plugin implementation of the 'ewp_flexible_address_simple' formatter.
- *
- * @FieldFormatter(
- *   id = "ewp_flexible_address_simple",
- *   label = @Translation("Simple (display all)"),
- *   field_types = {
- *     "ewp_flexible_address"
- *   }
- * )
  */
+#[FieldFormatter(
+  id: 'ewp_flexible_address_simple',
+  label: new TranslatableMarkup('Simple (display all)'),
+  field_types: [
+    'ewp_flexible_address',
+  ],
+)]
 class FlexibleAddressSimpleFormatter extends FormatterBase {
 
   /**

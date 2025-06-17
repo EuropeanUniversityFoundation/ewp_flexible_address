@@ -2,26 +2,27 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldFormatter;
 
+use Drupal\Core\Field\Attribute\FieldFormatter;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ewp_flexible_address\Plugin\Field\FieldType\FlexibleAddressItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'ewp_flexible_address_default' formatter.
- *
- * @FieldFormatter(
- *   id = "ewp_flexible_address_default",
- *   label = @Translation("Default"),
- *   field_types = {
- *     "ewp_flexible_address"
- *   }
- * )
  */
+#[FieldFormatter(
+  id: 'ewp_flexible_address_default',
+  label: new TranslatableMarkup('Default'),
+  field_types: [
+    'ewp_flexible_address',
+  ],
+)]
 class FlexibleAddressDefaultFormatter extends FormatterBase implements ContainerFactoryPluginInterface {
 
   /**

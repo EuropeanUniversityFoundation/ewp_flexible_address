@@ -2,27 +2,25 @@
 
 namespace Drupal\ewp_flexible_address\Plugin\Field\FieldWidget;
 
+use Drupal\Core\Field\Attribute\FieldWidget;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Locale\CountryManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\ewp_flexible_address\Plugin\Field\FieldType\FlexibleAddressItem;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Plugin implementation of the 'ewp_flexible_address_default' widget.
- *
- * @FieldWidget(
- *   id = "ewp_flexible_address_default",
- *   module = "ewp_flexible_address",
- *   label = @Translation("Default"),
- *   field_types = {
- *     "ewp_flexible_address"
- *   }
- * )
  */
+#[FieldWidget(
+  id: 'ewp_flexible_address_default',
+  label: new TranslatableMarkup('Default'),
+  field_types: ['ewp_flexible_address'],
+)]
 class FlexibleAddressDefaultWidget extends WidgetBase implements ContainerFactoryPluginInterface {
 
   /**
