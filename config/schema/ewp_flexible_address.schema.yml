@@ -1,4 +1,107 @@
 # Schema for the configuration of the Flexible Address field type.
+field.value.ewp_flexible_address:
+  type: mapping
+  label: Default value
+  mapping:
+    value:
+      type: string
+      label: Identifier
+    recipient_name:
+      type: string
+      label: 'Recipient name'
+      constraints:
+        Length:
+          min: 0
+    address_line_1:
+      type: string
+      label: 'Address line 1'
+      constraints:
+        Length:
+          min: 0
+    address_line_2:
+      type: string
+      label: 'Address line 2'
+      constraints:
+        Length:
+          min: 0
+    address_line_3:
+      type: string
+      label: 'Address line 3'
+      constraints:
+        Length:
+          min: 0
+    address_line_4:
+      type: string
+      label: 'Address line 4'
+      constraints:
+        Length:
+          min: 0
+    building_number:
+      type: string
+      label: 'Building number'
+      constraints:
+        Length:
+          min: 0
+    building_name:
+      type: string
+      label: 'Building name'
+      constraints:
+        Length:
+          min: 0
+    street_name:
+      type: string
+      label: 'Street name'
+      constraints:
+        Length:
+          min: 0
+    unit:
+      type: string
+      label: 'Unit'
+      constraints:
+        Length:
+          min: 0
+    floor:
+      type: string
+      label: 'Floor'
+      constraints:
+        Length:
+          min: 0
+    post_office_box:
+      type: string
+      label: 'Post office box'
+      constraints:
+        Length:
+          min: 0
+    delivery_point_code:
+      type: string
+      label: 'Delivery point code'
+      constraints:
+        Length:
+          min: 0
+    postal_code:
+      type: string
+      label: 'Postal code'
+      constraints:
+        Length:
+          min: 0
+    locality:
+      type: string
+      label: 'Locality'
+      constraints:
+        Length:
+          min: 0
+    region:
+      type: string
+      label: 'Region'
+      constraints:
+        Length:
+          min: 0
+    country:
+      type: string
+      label: 'Country'
+      constraints:
+        CountryCode: []
+
 field.storage_settings.ewp_flexible_address:
   type: mapping
   label: 'Storage settings'
