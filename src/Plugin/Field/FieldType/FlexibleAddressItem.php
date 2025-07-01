@@ -176,7 +176,8 @@ class FlexibleAddressItem extends FieldItemBase {
       ->setLabel(new TranslatableMarkup('@label', [
         '@label' => self::LABEL_COUNTRY,
       ]))
-      ->setRequired(TRUE);
+      ->setRequired(TRUE)
+      ->addConstraint('CountryCode', []);
 
     return $properties;
   }
