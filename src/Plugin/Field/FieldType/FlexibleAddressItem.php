@@ -488,6 +488,14 @@ class FlexibleAddressItem extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
+  public static function mainPropertyName() {
+    // In line with the isEmpty() check below.
+    return self::COUNTRY;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function isEmpty() {
     // Limit this check to the country code field.
     $value = $this->get(self::COUNTRY)->getValue();
